@@ -28,7 +28,7 @@ int AACRtpSink::read(double &nextSendTime)
     if(ret<0)
         return -1;
     _packet.dataSize = _dataSize;
-    _packet.timestamp += 90000 /_fps;
+    _packet.timestamp += (90000 /_fps);
 
     nextSendTime = 1000/_fps;
 

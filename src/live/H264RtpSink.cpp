@@ -35,7 +35,7 @@ int H264RtpSink::read(double &nextSendTime)
     }
     int ret = rtpSendH264Frame(&_packet, frame, frameSize);
     if(ret==1)
-        nextSendTime = 1;
+        nextSendTime = 0.1;
     else
         nextSendTime = (1000.0000/_fps);
 
@@ -135,13 +135,12 @@ int H264RtpSink::rtpSendH264Frame(RtpPacket *rtpPacket, uint8_t *frame, uint32_t
 
             _sendPacketCallback(_streamState, createPacket(rtpPacket));
 
-
             rtpPacket->seq++;
             sendBytes += remainPktSize;
         }
         free(data);
     }
-    rtpPacket->timestamp += 90000 /_fps;
+    rtpPacket->timestamp += (90000 /_fps);
 out:
 
     return sendBytes;

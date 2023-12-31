@@ -70,28 +70,6 @@ void RtspServer::start()
     _socketEvent = SocketEvent::createNew(_serverFd, EPOLLIN, commingCallback, (void *)this, NULL, NULL);
     _env->scheduler()->addEvent(_socketEvent);
     LOGI("创建RtspServer成功,ip:[%s],port:[%d]", "0.0.0.0", 8081);
-
-    ServerMediaSession*mediaSession1 = ServerMediaSession::createNew("song1");
-    ServerMediaSubSession* h264SubSession1 = H264ServerMediaSubSession::createNew("/home/adminlzf/Desktop/myproject/LZF_RtspServer/data/banma.h264","h264",25);
-    ServerMediaSubSession* aacSubSession1 = AACServerMediaSubSession::createNew("/home/adminlzf/Desktop/myproject/LZF_RtspServer/data/banma.aac","aac",46.875);
-    mediaSession1->addSubSession(h264SubSession1);
-    mediaSession1->addSubSession(aacSubSession1);
-
-    ServerMediaSession*mediaSession2 = ServerMediaSession::createNew("song2");
-    ServerMediaSubSession* h264SubSession2 = H264ServerMediaSubSession::createNew("/home/adminlzf/Desktop/myproject/LZF_RtspServer/data/saddle_of_heart.h264","h264",25);
-    ServerMediaSubSession* aacSubSession2 = AACServerMediaSubSession::createNew("/home/adminlzf/Desktop/myproject/LZF_RtspServer/data/saddle_of_heart.aac","aac",46.875);
-    mediaSession2->addSubSession(h264SubSession2);
-    mediaSession2->addSubSession(aacSubSession2);
-
-    ServerMediaSession*mediaSession3 = ServerMediaSession::createNew("movie1");
-    ServerMediaSubSession* h264SubSession3 = H264ServerMediaSubSession::createNew("/home/adminlzf/Desktop/myproject/LZF_RtspServer/data/output.h264","h264",24);
-    ServerMediaSubSession* aacSubSession3 = AACServerMediaSubSession::createNew("/home/adminlzf/Desktop/myproject/LZF_RtspServer/data/output.aac","aac",46.875);
-    mediaSession3->addSubSession(h264SubSession3);
-    mediaSession3->addSubSession(aacSubSession3);
-    
-    addMediaSession(mediaSession1);
-    addMediaSession(mediaSession3);
-    addMediaSession(mediaSession2);
 }
 
 ServerMediaSession *RtspServer::lookForMediaSession(std::string name)
